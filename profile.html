@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="shortcut icon" href="logo.png" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #8D5A9F;
+            font-family: 'Poppins', sans-serif;
+            padding-top: 70px; /* Espacio para la navbar fija */
+        }
+        .navbar {
+            background: rgba(141, 90, 159, 0.865);
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .navbar-brand:hover, .nav-link:hover {
+            color: #d1c4e9 !important;
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.51);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .profile-header img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        .profile-header h2 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+        .profile-header p {
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+        .profile-header .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .profile-header .stats div {
+            text-align: center;
+        }
+        .profile-header .stats div span {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .card {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+        .card-body {
+            padding: 0.5rem;
+            position: relative;
+        }
+        .card-img-top {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .icon-bar {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            cursor: pointer;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+        }
+        .icon-heart {
+            width: 24px;
+            height: 24px;
+            margin: 0.5rem 0.5rem 0 0;
+            cursor: pointer;
+        }
+        .icon-heart.liked {
+            filter: invert(22%) sepia(98%) saturate(7453%) hue-rotate(346deg) brightness(101%) contrast(105%);
+        }
+        .container {
+            margin-top: 2rem;
+        }
+        .btn-primary {
+            background-color: #6f42c1;
+            border-color: #6f42c1;
+        }
+        .btn-primary:hover {
+            background-color: #5a32a3;
+            border-color: #5a32a3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #565e64;
+            border-color: #565e64;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <a class="navbar-brand" href="#">InstaPhoto</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:history.back()">Volver</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="profile-header">
+            <img src="imagen.jpeg" alt="Imagen de perfil">
+            <h2>Karina</h2>
+            <p>Estudiante</p>
+            <div class="stats">
+                <div>
+                    <span>100</span>
+                    Seguidores
+                </div>
+                <div>
+                    <span>100</span>
+                    Seguidos
+                </div>
+                <div>
+                    <span>1</span>
+                    Publicacion/es
+                </div>
+            </div>
+        </div>
+        <h2 class="text-center mb-4">Mis Fotos/Videos</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="icon-bar">
+                            <img src="dot.png" alt="Menu" class="icon">
+                        </div>
+                        <img src="imagen.jpeg" class="card-img-top" alt="...">
+                        <p class="card-text">
+                            <img src="heart.png" alt="Like" class="icon icon-heart" id="heart-icon-1" data-id="1">
+                            <img src="comment.png" alt="Comment" class="icon icon-comment">
+                            <img src="share.png" alt="Share" class="icon icon-share">
+                        </p>
+                        <p class="card-text"><small class="text-muted">Likes: 120</small></p>
+                        <p class="card-text">Mi foto de perfil</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Función para actualizar el estado del icono de corazón
+            function updateHeartIcon(id) {
+                if (localStorage.getItem('liked-' + id)) {
+                    $('#heart-icon-' + id).addClass('liked');
+                } else {
+                    $('#heart-icon-' + id).removeClass('liked');
+                }
+            }
+
+            // Cargar el estado del icono de corazón desde localStorage
+            $('.icon-heart').each(function() {
+                var id = $(this).data('id');
+                updateHeartIcon(id);
+            });
+
+            // Manejar el clic en el icono de corazón
+            $('.icon-heart').click(function() {
+                var id = $(this).data('id');
+                if (localStorage.getItem('liked-' + id)) {
+                    localStorage.removeItem('liked-' + id);
+                } else {
+                    localStorage.setItem('liked-' + id, true);
+                }
+                updateHeartIcon(id);
+            });
+        });
+    </script>
+</body>
+</html>
